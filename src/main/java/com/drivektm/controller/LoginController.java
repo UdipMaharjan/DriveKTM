@@ -1,6 +1,7 @@
 package com.drivektm.controller;
 
 import com.drivektm.config.DBConfig;
+import com.drivektm.util.PasswordUtil;
 import com.drivektm.util.CookieUtil;
 import com.drivektm.util.SessionUtil;
 import jakarta.servlet.ServletException;
@@ -45,29 +46,29 @@ public class LoginController extends HttpServlet {
         try (Connection con = DBConfig.getConnection()) {
 
             // Query to check user credentials
-            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, email);
-            ps.setString(2, password);
+        	String query = "SELECT * FROM users WHERE email = ?";
+        	PreparedStatement ps = con.prepareStatement(query);
+        	ps.setString(1, email);
 
-            ResultSet rs = ps.executeQuery();
+        	ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                // If user is found, create session and set cookies
-                HttpSession session = request.getSession();
-                session.setAttribute("userId", rs.getInt("id"));
-                session.setAttribute("userName", rs.getString("first_name") + " " + rs.getString("last_name"));
-                session.setAttribute("userEmail", rs.getString("email"));
+        	if (rs.next()) {
+        	    String storedHashedPassword = rs.getString("password");
 
-                // Set a cookie for user (session cookie)
-                CookieUtil.addCookie(response, "userId", String.valueOf(rs.getInt("id")), 3600); // Expires in 1 hour
+        	    if (PasswordUtil.checkPassword(password, storedHashedPassword)) {
+        	        HttpSession session = request.getSession();
+        	        session.setAttribute("userId", rs.getInt("id"));
+        	        session.setAttribute("userName", rs.getString("first_name") + " " + rs.getString("last_name"));
+        	        session.setAttribute("userEmail", rs.getString("email"));
 
-                // Redirect to home page after successful login
-                response.sendRedirect("home?login=success");
-            } else {
-                // If no match found, redirect back to login page with error
-                response.sendRedirect("login?error=invalid");
-            }
+        	        CookieUtil.addCookie(response, "userId", String.valueOf(rs.getInt("id")), 3600);
+        	        response.sendRedirect("home");
+        	    } else {
+        	        response.sendRedirect("login?error=invalid");
+        	    }
+        	} else {
+        	    response.sendRedirect("login?error=invalid");
+        	}
 
         } catch (Exception e) {
             e.printStackTrace();

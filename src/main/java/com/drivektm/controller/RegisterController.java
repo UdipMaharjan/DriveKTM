@@ -1,6 +1,7 @@
 package com.drivektm.controller;
 
 import com.drivektm.config.DBConfig;
+import com.drivektm.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -101,7 +102,8 @@ public class RegisterController extends HttpServlet {
             ps.setString(2, lastName);
             ps.setString(3, email);
             ps.setString(4, phone);
-            ps.setString(5, password);
+            String hashedPassword = PasswordUtil.hashPassword(password);
+            ps.setString(5, hashedPassword);
             ps.setString(6, licenseType);
 
             int result = ps.executeUpdate();

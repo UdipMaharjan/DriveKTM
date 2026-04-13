@@ -225,68 +225,79 @@
   .booking-body {
     padding: 36px 32px 40px;
   }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 26px;
+}
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px 26px;
-  }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.form-group.full {
+  grid-column: 1 / -1;
+}
 
-  .form-group.full {
-    grid-column: 1 / -1;
-  }
+.form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
 
-  .form-group label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-  }
+.form-control,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,169,110,0.16);
+  color: var(--text);
+  padding: 14px 16px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.22s, background 0.22s;
+}
 
-  .form-control,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(201,169,110,0.16);
-    color: var(--text);
-    padding: 14px 16px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    outline: none;
-    transition: border-color 0.22s, background 0.22s;
-  }
+.form-control:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.05);
+}
 
-  .form-control:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--gold);
-    background: rgba(255,255,255,0.05);
-  }
+.form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color-scheme: dark;
+  cursor: pointer;
+}
 
-  .form-group select {
-    appearance: none;
-    color-scheme: dark;
-  }
+.form-group select option {
+  background: #1A1A1A;
+  color: #F0EDE8;
+}
 
-  .form-group textarea {
-    resize: vertical;
-    min-height: 130px;
-  }
+.form-group select option:disabled {
+  color: #888880;
+}
 
-  .form-note {
-    margin-top: 26px;
-    color: var(--text-muted);
-    font-size: 13px;
-    line-height: 1.7;
-  }
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.form-note {
+  margin-top: 26px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
 
   .submit-row {
     margin-top: 30px;
@@ -507,6 +518,52 @@
     transform: translateY(-2px);
     box-shadow: 0 12px 36px rgba(201,169,110,0.45);
   }
+  .booking-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.booking-popup-box {
+    background: #111;
+    border: 1px solid rgba(201,169,110,0.35);
+    padding: 32px 28px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+.booking-popup-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: #FDFCFA;
+    margin-bottom: 12px;
+}
+
+.booking-popup-box p {
+    font-size: 15px;
+    color: #AAA39A;
+    margin-bottom: 24px;
+    line-height: 1.7;
+}
+
+.booking-popup-box button {
+    padding: 12px 24px;
+    border: none;
+    background: linear-gradient(135deg, #C9A96E 0%, #E8C98A 100%);
+    color: #0A0A0A;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
 
   /* RESPONSIVE */
   @media (max-width: 1100px) {
@@ -582,7 +639,10 @@
 <%
 String error = request.getParameter("error");
 String success = request.getParameter("success");
-String selectedVehicle = request.getParameter("vehicle");
+String selectedVehicle = request.getParameter("vehicleName");
+if (selectedVehicle == null || selectedVehicle.isEmpty()) {
+    selectedVehicle = request.getParameter("vehicle");
+}
 %>
 
 <!-- NAVBAR -->
@@ -686,14 +746,14 @@ String selectedVehicle = request.getParameter("vehicle");
 
             <div class="form-group">
               <label for="vehicleName">Select Vehicle</label>
-              <select id="vehicleName" name="vehicleName" required>
-                <option value="">Select Vehicle</option>
-                <option value="Fortuner" <%= "Fortuner".equals(selectedVehicle) ? "selected" : "" %>>Fortuner</option>
-                <option value="Camry Hybrid" <%= "Camry Hybrid".equals(selectedVehicle) ? "selected" : "" %>>Camry Hybrid</option>
-                <option value="RE Himalayan" <%= "RE Himalayan".equals(selectedVehicle) ? "selected" : "" %>>RE Himalayan</option>
-                <option value="Honda Activa" <%= "Honda Activa".equals(selectedVehicle) ? "selected" : "" %>>Honda Activa</option>
-                <option value="Other">Other</option>
-              </select>
+        <select id="vehicleName" name="vehicleName" required>
+    <option value="" disabled <%= (selectedVehicle == null || selectedVehicle.isEmpty()) ? "selected" : "" %>>Select Vehicle</option>
+    <option value="Fortuner" <%= "Fortuner".equals(selectedVehicle) ? "selected" : "" %>>Fortuner</option>
+    <option value="Camry Hybrid" <%= "Camry Hybrid".equals(selectedVehicle) ? "selected" : "" %>>Camry Hybrid</option>
+    <option value="RE Himalayan" <%= "RE Himalayan".equals(selectedVehicle) ? "selected" : "" %>>RE Himalayan</option>
+    <option value="Honda Activa" <%= "Honda Activa".equals(selectedVehicle) ? "selected" : "" %>>Honda Activa</option>
+    <option value="Other" <%= "Other".equals(selectedVehicle) ? "selected" : "" %>>Other</option>
+</select>
             </div>
 
             <div class="form-group">
@@ -833,6 +893,16 @@ String selectedVehicle = request.getParameter("vehicle");
 
 <button class="float-cta" onclick="location.href='tel:+97715000000'">📞 Call Us Now</button>
 
+<% if ("booked".equals(success)) { %>
+<div class="booking-popup-overlay" id="bookingPopup">
+    <div class="booking-popup-box">
+        <h3>Booking Confirmed</h3>
+        <p>Thank you for booking with DriveKTM.</p>
+        <button type="button" onclick="closeBookingPopup()">OK</button>
+    </div>
+</div>
+<% } %>
+
 <script>
   window.addEventListener('scroll', () => {
     document.querySelector('nav').style.background =
@@ -854,7 +924,17 @@ String selectedVehicle = request.getParameter("vehicle");
       }
     });
   }
+
+  function closeBookingPopup() {
+    const popup = document.getElementById("bookingPopup");
+    if (popup) {
+      popup.style.display = "none";
+    }
+  }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>

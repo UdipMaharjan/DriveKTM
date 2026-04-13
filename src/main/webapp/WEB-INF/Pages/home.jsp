@@ -552,7 +552,7 @@
           <span class="spec">👥 7 Seats</span>
           <span class="spec">❄️ AC</span>
         </div>
-        <button class="btn-sm" onclick="location.href='booking.jsp?vehicle=fortuner'">Book Now</button>
+        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Fortuner'">Book Now</button>
       </div>
     </div>
 
@@ -571,7 +571,7 @@
           <span class="spec">👥 5 Seats</span>
           <span class="spec">❄️ AC</span>
         </div>
-        <button class="btn-sm" onclick="location.href='booking.jsp?vehicle=camry'">Book Now</button>
+        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Camry%20Hybrid'">Book Now</button>
       </div>
     </div>
 
@@ -590,7 +590,7 @@
           <span class="spec">👤 2 Seats</span>
           <span class="spec">🏔️ Off-road</span>
         </div>
-        <button class="btn-sm" onclick="location.href='booking.jsp?vehicle=himalayan'">Book Now</button>
+        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=RE%20Himalayan'">Book Now</button>
       </div>
     </div>
 
@@ -609,7 +609,7 @@
           <span class="spec">👤 2 Seats</span>
           <span class="spec">🏙️ City</span>
         </div>
-        <button class="btn-sm" onclick="location.href='booking.jsp?vehicle=activa'">Book Now</button>
+        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Honda%20Activa'">Book Now</button>
       </div>
     </div>
 
@@ -790,7 +790,9 @@
   </div>
 </footer>
 
-<button class="float-cta" onclick="location.href='tel:+97715000000'">📞 Call Us Now</button>
+<button class="float-cta" onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">
+  📞 Call Us Now
+</button>
 
 <script>
   // Nav darkens on scroll
