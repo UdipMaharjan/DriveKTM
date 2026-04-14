@@ -539,39 +539,39 @@
 
     <div class="vehicle-card">
    <div class="vehicle-img">
-     <img src="${pageContext.request.contextPath}/images/image1.png" 
+     <img src="${pageContext.request.contextPath}/images/ToyotaFortuner.png" 
        alt="Fortuner" 
        style="width:100%; height:100%; object-fit:cover; display:block;">
       </div>
       <div class="vehicle-body">
         <div class="vehicle-tag">Premium SUV</div>
-        <div class="vehicle-name">Fortuner</div>
+        <div class="vehicle-name">Toyota Fortuner</div>
         <div class="vehicle-price">From <strong>Rs. 4,500</strong> / day</div>
         <div class="vehicle-specs">
           <span class="spec">⛽ Diesel</span>
           <span class="spec">👥 7 Seats</span>
           <span class="spec">❄️ AC</span>
         </div>
-        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Fortuner'">Book Now</button>
+        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=ToyotaFortuner'">Book Now</button>
       </div>
     </div>
 
     <div class="vehicle-card">
    <div class="vehicle-img">
-     <img src="${pageContext.request.contextPath}/images/image2.png" 
+     <img src="${pageContext.request.contextPath}/images/ToyotaCamry.png" 
        alt="Fortuner" 
        style="width:100%; height:100%; object-fit:cover; display:block;">
       </div>
       <div class="vehicle-body">
         <div class="vehicle-tag">Executive Sedan</div>
-        <div class="vehicle-name">Camry Hybrid</div>
+        <div class="vehicle-name">Toyota Camry</div>
         <div class="vehicle-price">From <strong>Rs. 3,200</strong> / day</div>
         <div class="vehicle-specs">
           <span class="spec">⚡ Hybrid</span>
           <span class="spec">👥 5 Seats</span>
           <span class="spec">❄️ AC</span>
         </div>
-        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Camry%20Hybrid'">Book Now</button>
+        <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Toyota%20Camry'">Book Now</button>
       </div>
     </div>
 

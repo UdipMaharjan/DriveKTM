@@ -747,12 +747,38 @@ if (selectedVehicle == null || selectedVehicle.isEmpty()) {
             <div class="form-group">
               <label for="vehicleName">Select Vehicle</label>
         <select id="vehicleName" name="vehicleName" required>
-    <option value="" disabled <%= (selectedVehicle == null || selectedVehicle.isEmpty()) ? "selected" : "" %>>Select Vehicle</option>
-    <option value="Fortuner" <%= "Fortuner".equals(selectedVehicle) ? "selected" : "" %>>Fortuner</option>
-    <option value="Camry Hybrid" <%= "Camry Hybrid".equals(selectedVehicle) ? "selected" : "" %>>Camry Hybrid</option>
-    <option value="RE Himalayan" <%= "RE Himalayan".equals(selectedVehicle) ? "selected" : "" %>>RE Himalayan</option>
-    <option value="Honda Activa" <%= "Honda Activa".equals(selectedVehicle) ? "selected" : "" %>>Honda Activa</option>
-    <option value="Other" <%= "Other".equals(selectedVehicle) ? "selected" : "" %>>Other</option>
+<option value="Toyota Fortuner" <%= "Toyota Fortuner".equals(selectedVehicle) ? "selected" : "" %>>Toyota Fortuner</option>
+<option value="Toyota Camry" <%= "Toyota Camry".equals(selectedVehicle) ? "selected" : "" %>>Toyota Camry</option>
+<option value="Hyundai Creta" <%= "Hyundai Creta".equals(selectedVehicle) ? "selected" : "" %>>Hyundai Creta</option>
+<option value="Honda City" <%= "Honda City".equals(selectedVehicle) ? "selected" : "" %>>Honda City</option>
+<option value="Suzuki XL7" <%= "Suzuki XL7".equals(selectedVehicle) ? "selected" : "" %>>Suzuki XL7</option>
+<option value="Ford Ranger" <%= "Ford Ranger".equals(selectedVehicle) ? "selected" : "" %>>Ford Ranger</option>
+<option value="Mahindra Scorpio" <%= "Mahindra Scorpio".equals(selectedVehicle) ? "selected" : "" %>>Mahindra Scorpio</option>
+<option value="Kia Seltos" <%= "Kia Seltos".equals(selectedVehicle) ? "selected" : "" %>>Kia Seltos</option>
+<option value="Suzuki Swift" <%= "Suzuki Swift".equals(selectedVehicle) ? "selected" : "" %>>Suzuki Swift</option>
+<option value="Toyota Yaris" <%= "Toyota Yaris".equals(selectedVehicle) ? "selected" : "" %>>Toyota Yaris</option>
+<option value="MG Hector" <%= "MG Hector".equals(selectedVehicle) ? "selected" : "" %>>MG Hector</option>
+<option value="Nissan Magnite" <%= "Nissan Magnite".equals(selectedVehicle) ? "selected" : "" %>>Nissan Magnite</option>
+<option value="RE Himalayan" <%= "RE Himalayan".equals(selectedVehicle) ? "selected" : "" %>>RE Himalayan</option>
+<option value="KTM Duke 200" <%= "KTM Duke 200".equals(selectedVehicle) ? "selected" : "" %>>KTM Duke 200</option>
+<option value="KTM Duke 390" <%= "KTM Duke 390".equals(selectedVehicle) ? "selected" : "" %>>KTM Duke 390</option>
+<option value="Yamaha R15" <%= "Yamaha R15".equals(selectedVehicle) ? "selected" : "" %>>Yamaha R15</option>
+<option value="Bajaj Pulsar 220" <%= "Bajaj Pulsar 220".equals(selectedVehicle) ? "selected" : "" %>>Bajaj Pulsar 220</option>
+<option value="Honda Hornet" <%= "Honda Hornet".equals(selectedVehicle) ? "selected" : "" %>>Honda Hornet</option>
+<option value="TVS Apache RTR" <%= "TVS Apache RTR".equals(selectedVehicle) ? "selected" : "" %>>TVS Apache RTR</option>
+<option value="Suzuki Gixxer" <%= "Suzuki Gixxer".equals(selectedVehicle) ? "selected" : "" %>>Suzuki Gixxer</option>
+<option value="Honda Activa" <%= "Honda Activa".equals(selectedVehicle) ? "selected" : "" %>>Honda Activa</option>
+<option value="TVS Ntorq" <%= "TVS Ntorq".equals(selectedVehicle) ? "selected" : "" %>>TVS Ntorq</option>
+<option value="Yamaha RayZR" <%= "Yamaha RayZR".equals(selectedVehicle) ? "selected" : "" %>>Yamaha RayZR</option>
+<option value="Suzuki Access 125" <%= "Suzuki Access 125".equals(selectedVehicle) ? "selected" : "" %>>Suzuki Access 125</option>
+<option value="Aprilia SR 160" <%= "Aprilia SR 160".equals(selectedVehicle) ? "selected" : "" %>>Aprilia SR 160</option>
+<option value="Honda Dio" <%= "Honda Dio".equals(selectedVehicle) ? "selected" : "" %>>Honda Dio</option>
+<option value="Vespa VXL" <%= "Vespa VXL".equals(selectedVehicle) ? "selected" : "" %>>Vespa VXL</option>
+<option value="Yadea Electric" <%= "Yadea Electric".equals(selectedVehicle) ? "selected" : "" %>>Yadea Electric</option>
+<option value="Mountain Bike" <%= "Mountain Bike".equals(selectedVehicle) ? "selected" : "" %>>Mountain Bike</option>
+<option value="Road Bike" <%= "Road Bike".equals(selectedVehicle) ? "selected" : "" %>>Road Bike</option>
+<option value="Hybrid Bike" <%= "Hybrid Bike".equals(selectedVehicle) ? "selected" : "" %>>Hybrid Bike</option>
+<option value="City Bicycle" <%= "City Bicycle".equals(selectedVehicle) ? "selected" : "" %>>City Bicycle</option>
 </select>
             </div>
 
