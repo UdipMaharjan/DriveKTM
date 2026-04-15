@@ -8,6 +8,8 @@
 <title>DriveKTM — Vehicles</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <style>
   :root {
     --gold: #C9A96E;
@@ -434,491 +436,185 @@
   </p>
 </section>
 
+<%
+    ArrayList<HashMap<String, String>> cars =
+        (ArrayList<HashMap<String, String>>) request.getAttribute("cars");
+
+    ArrayList<HashMap<String, String>> bikes =
+        (ArrayList<HashMap<String, String>>) request.getAttribute("bikes");
+
+    ArrayList<HashMap<String, String>> scooters =
+        (ArrayList<HashMap<String, String>>) request.getAttribute("scooters");
+
+    ArrayList<HashMap<String, String>> bicycles =
+        (ArrayList<HashMap<String, String>>) request.getAttribute("bicycles");
+%>
+
 <section class="vehicles-page">
 
-  <!-- CARS -->
-  <section class="category-section">
-    <div class="category-head">
-      <h2 class="category-title">Cars</h2>
-    </div>
-
-    <div class="vehicles-grid">
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/ToyotaFortuner.png" alt="Toyota Fortuner"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Premium SUV</div>
-          <div class="vehicle-name">Toyota Fortuner</div>
-          <div class="vehicle-type">7 Seater SUV</div>
-          <div class="vehicle-price">From <strong>Rs. 4,500</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Diesel</span><span class="spec">👥 7 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Toyota%20Fortuner'">Book Now</button>
+    <!-- CARS -->
+    <section class="category-section">
+        <div class="category-head">
+            <h2 class="category-title">Cars</h2>
         </div>
-      </div>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/ToyotaCamry.png" alt="Toyota Camry"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Executive Sedan</div>
-          <div class="vehicle-name">Toyota Camry</div>
-          <div class="vehicle-type">Luxury Sedan</div>
-          <div class="vehicle-price">From <strong>Rs. 3,200</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⚡ Hybrid</span><span class="spec">👥 5 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Toyota%20Camry'">Book Now</button>
+        <div class="vehicles-grid">
+            <% if (cars != null) {
+                for (HashMap<String, String> v : cars) {
+                    String name = v.get("name");
+                    String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
+            %>
+
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                </div>
+
+                <div class="vehicle-body">
+                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-name"><%= name %></div>
+                    <div class="vehicle-type"><%= v.get("type") %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+
+                    <div class="vehicle-specs">
+                        <span class="spec">⛽ <%= v.get("fuel") %></span>
+                        <span class="spec">👥 <%= v.get("seats") %></span>
+                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                    </div>
+
+                    <button class="btn-sm"
+                        onclick="location.href='<%= request.getContextPath() %>/book?vehicle=<%= encodedName %>'">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <% } } %>
         </div>
-      </div>
+    </section>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/Creta.png" alt="Hyundai Creta"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Compact SUV</div>
-          <div class="vehicle-name">Hyundai Creta</div>
-          <div class="vehicle-type">Comfort SUV</div>
-          <div class="vehicle-price">From <strong>Rs. 3,600</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Hyundai%20Creta'">Book Now</button>
+    <!-- BIKES -->
+    <section class="category-section">
+        <div class="category-head">
+            <h2 class="category-title">Bikes</h2>
         </div>
-      </div>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/HondaCity.png" alt="Honda City"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">City Sedan</div>
-          <div class="vehicle-name">Honda City</div>
-          <div class="vehicle-type">Sedan</div>
-          <div class="vehicle-price">From <strong>Rs. 2,900</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Honda%20City'">Book Now</button>
+        <div class="vehicles-grid">
+            <% if (bikes != null) {
+                for (HashMap<String, String> v : bikes) {
+                    String name = v.get("name");
+                    String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
+            %>
+
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                </div>
+
+                <div class="vehicle-body">
+                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-name"><%= name %></div>
+                    <div class="vehicle-type"><%= v.get("type") %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+
+                    <div class="vehicle-specs">
+                        <span class="spec">⛽ <%= v.get("fuel") %></span>
+                        <span class="spec">👥 <%= v.get("seats") %></span>
+                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                    </div>
+
+                    <button class="btn-sm"
+                        onclick="location.href='<%= request.getContextPath() %>/book?vehicle=<%= encodedName %>'">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <% } } %>
         </div>
-      </div>
+    </section>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/SuzukuiXL7.png" alt="Suzuki XL7"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">MPV</div>
-          <div class="vehicle-name">Suzuki XL7</div>
-          <div class="vehicle-type">Family MPV</div>
-          <div class="vehicle-price">From <strong>Rs. 3,300</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 7 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Suzuki%20XL7'">Book Now</button>
+    <!-- SCOOTERS -->
+    <section class="category-section">
+        <div class="category-head">
+            <h2 class="category-title">Scooters</h2>
         </div>
-      </div>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/FordRanger.png" alt="Ford Ranger"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Pickup</div>
-          <div class="vehicle-name">Ford Ranger</div>
-          <div class="vehicle-type">Pickup Truck</div>
-          <div class="vehicle-price">From <strong>Rs. 4,200</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Diesel</span><span class="spec">👥 5 Seats</span><span class="spec">🏔️ Off-road</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Ford%20Ranger'">Book Now</button>
+        <div class="vehicles-grid">
+            <% if (scooters != null) {
+                for (HashMap<String, String> v : scooters) {
+                    String name = v.get("name");
+                    String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
+            %>
+
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                </div>
+
+                <div class="vehicle-body">
+                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-name"><%= name %></div>
+                    <div class="vehicle-type"><%= v.get("type") %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+
+                    <div class="vehicle-specs">
+                        <span class="spec">⛽ <%= v.get("fuel") %></span>
+                        <span class="spec">👥 <%= v.get("seats") %></span>
+                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                    </div>
+
+                    <button class="btn-sm"
+                        onclick="location.href='<%= request.getContextPath() %>/book?vehicle=<%= encodedName %>'">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <% } } %>
         </div>
-      </div>
+    </section>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/MahindraScorpio.png" alt="Mahindra Scorpio"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Adventure SUV</div>
-          <div class="vehicle-name">Mahindra Scorpio</div>
-          <div class="vehicle-type">SUV</div>
-          <div class="vehicle-price">From <strong>Rs. 4,000</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Diesel</span><span class="spec">👥 7 Seats</span><span class="spec">🏔️ 4x4</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Mahindra%20Scorpio'">Book Now</button>
+    <!-- BICYCLES -->
+    <section class="category-section">
+        <div class="category-head">
+            <h2 class="category-title">Bicycles</h2>
         </div>
-      </div>
 
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/KiaSeltos.png" alt="Kia Seltos"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Modern SUV</div>
-          <div class="vehicle-name">Kia Seltos</div>
-          <div class="vehicle-type">SUV</div>
-          <div class="vehicle-price">From <strong>Rs. 3,700</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Kia%20Seltos'">Book Now</button>
+        <div class="vehicles-grid">
+            <% if (bicycles != null) {
+                for (HashMap<String, String> v : bicycles) {
+                    String name = v.get("name");
+                    String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
+            %>
+
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                </div>
+
+                <div class="vehicle-body">
+                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-name"><%= name %></div>
+                    <div class="vehicle-type"><%= v.get("type") %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+
+                    <div class="vehicle-specs">
+                        <span class="spec">⛽ <%= v.get("fuel") %></span>
+                        <span class="spec">👥 <%= v.get("seats") %></span>
+                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                    </div>
+
+                    <button class="btn-sm"
+                        onclick="location.href='<%= request.getContextPath() %>/book?vehicle=<%= encodedName %>'">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <% } } %>
         </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/SuzukiSwift.png" alt="Suzuki Swift"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Hatchback</div>
-          <div class="vehicle-name">Suzuki Swift</div>
-          <div class="vehicle-type">City Car</div>
-          <div class="vehicle-price">From <strong>Rs. 2,200</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">🏙️ City</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Suzuki%20Swift'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/ToyotaYaris.png" alt="Toyota Yaris"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Compact Sedan</div>
-          <div class="vehicle-name">Toyota Yaris</div>
-          <div class="vehicle-type">Sedan</div>
-          <div class="vehicle-price">From <strong>Rs. 2,800</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Toyota%20Yaris'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/MGHector.png" alt="MG Hector"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Premium SUV</div>
-          <div class="vehicle-name">MG Hector</div>
-          <div class="vehicle-type">SUV</div>
-          <div class="vehicle-price">From <strong>Rs. 4,100</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">❄️ AC</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=MG%20Hector'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/NissanMagnite.png" alt="Nissan Magnite"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Compact SUV</div>
-          <div class="vehicle-name">Nissan Magnite</div>
-          <div class="vehicle-type">SUV</div>
-          <div class="vehicle-price">From <strong>Rs. 2,700</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👥 5 Seats</span><span class="spec">🏙️ City</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Nissan%20Magnite'">Book Now</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BIKES -->
-  <section class="category-section">
-    <div class="category-head">
-      <h2 class="category-title">Bikes</h2>
-    </div>
-
-    <div class="vehicles-grid">
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike1.jpg" alt="RE Himalayan"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Adventure Bike</div>
-          <div class="vehicle-name">RE Himalayan</div>
-          <div class="vehicle-type">Touring Bike</div>
-          <div class="vehicle-price">From <strong>Rs. 1,800</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏔️ Off-road</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=RE%20Himalayan'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike2.jpg" alt="KTM Duke 200"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Street Bike</div>
-          <div class="vehicle-name">KTM Duke 200</div>
-          <div class="vehicle-type">Naked Sports</div>
-          <div class="vehicle-price">From <strong>Rs. 1,700</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">⚡ Quick Ride</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=KTM%20Duke%20200'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike3.jpg" alt="KTM Duke 390"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Performance Bike</div>
-          <div class="vehicle-name">KTM Duke 390</div>
-          <div class="vehicle-type">Street Bike</div>
-          <div class="vehicle-price">From <strong>Rs. 2,300</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🔥 Power</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=KTM%20Duke%20390'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike4.jpg" alt="Yamaha R15"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Sports Bike</div>
-          <div class="vehicle-name">Yamaha R15</div>
-          <div class="vehicle-type">Sport Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 1,900</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏁 Sports</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Yamaha%20R15'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike5.jpg" alt="Bajaj Pulsar 220"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Touring Bike</div>
-          <div class="vehicle-name">Bajaj Pulsar 220</div>
-          <div class="vehicle-type">Street Touring</div>
-          <div class="vehicle-price">From <strong>Rs. 1,500</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🛣️ Touring</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Bajaj%20Pulsar%20220'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike6.jpg" alt="Honda Hornet"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Street Bike</div>
-          <div class="vehicle-name">Honda Hornet</div>
-          <div class="vehicle-type">Urban Bike</div>
-          <div class="vehicle-price">From <strong>Rs. 1,400</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏙️ City</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Honda%20Hornet'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike7.jpg" alt="TVS Apache RTR"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Sports Street</div>
-          <div class="vehicle-name">TVS Apache RTR</div>
-          <div class="vehicle-type">Performance Bike</div>
-          <div class="vehicle-price">From <strong>Rs. 1,600</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">⚡ Agile</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=TVS%20Apache%20RTR'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/bike8.jpg" alt="Suzuki Gixxer"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Sport Ride</div>
-          <div class="vehicle-name">Suzuki Gixxer</div>
-          <div class="vehicle-type">Street Sport</div>
-          <div class="vehicle-price">From <strong>Rs. 1,550</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏁 Ride</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Suzuki%20Gixxer'">Book Now</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCOOTERS -->
-  <section class="category-section">
-    <div class="category-head">
-      <h2 class="category-title">Scooters</h2>
-    </div>
-
-    <div class="vehicles-grid">
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter1.jpg" alt="Honda Activa"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">City Scooter</div>
-          <div class="vehicle-name">Honda Activa</div>
-          <div class="vehicle-type">Daily Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 800</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏙️ City</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Honda%20Activa'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter2.jpg" alt="TVS Ntorq"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Sport Scooter</div>
-          <div class="vehicle-name">TVS Ntorq</div>
-          <div class="vehicle-type">Youth Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 950</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">⚡ Sporty</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=TVS%20Ntorq'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter3.jpg" alt="Yamaha RayZR"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Light Scooter</div>
-          <div class="vehicle-name">Yamaha RayZR</div>
-          <div class="vehicle-type">Urban Scooter</div>
-          <div class="vehicle-price">From <strong>Rs. 900</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏙️ Urban</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Yamaha%20RayZR'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter4.jpg" alt="Suzuki Access 125"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Comfort Scooter</div>
-          <div class="vehicle-name">Suzuki Access 125</div>
-          <div class="vehicle-type">Commuter</div>
-          <div class="vehicle-price">From <strong>Rs. 920</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🛵 Easy Ride</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Suzuki%20Access%20125'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter5.jpg" alt="Aprilia SR 160"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Performance Scooter</div>
-          <div class="vehicle-name">Aprilia SR 160</div>
-          <div class="vehicle-type">Sport Scooter</div>
-          <div class="vehicle-price">From <strong>Rs. 1,100</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🔥 Fast</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Aprilia%20SR%20160'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter6.jpg" alt="Honda Dio"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Youth Scooter</div>
-          <div class="vehicle-name">Honda Dio</div>
-          <div class="vehicle-type">City Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 850</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">🏙️ Smooth</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Honda%20Dio'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter7.jpg" alt="Vespa VXL"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Premium Scooter</div>
-          <div class="vehicle-name">Vespa VXL</div>
-          <div class="vehicle-type">Classic Style</div>
-          <div class="vehicle-price">From <strong>Rs. 1,250</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⛽ Petrol</span><span class="spec">👤 2 Seats</span><span class="spec">✨ Premium</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Vespa%20VXL'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/scooter8.jpg" alt="Yadea Electric"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Electric Scooter</div>
-          <div class="vehicle-name">Yadea Electric</div>
-          <div class="vehicle-type">Eco Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 1,000</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">⚡ Electric</span><span class="spec">👤 2 Seats</span><span class="spec">🌿 Eco</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Yadea%20Electric'">Book Now</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BICYCLES -->
-  <section class="category-section">
-    <div class="category-head">
-      <h2 class="category-title">Bicycles</h2>
-    </div>
-
-    <div class="vehicles-grid">
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/cycle1.jpg" alt="Mountain Bike"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Adventure Cycle</div>
-          <div class="vehicle-name">Mountain Bike</div>
-          <div class="vehicle-type">Trail Ready</div>
-          <div class="vehicle-price">From <strong>Rs. 500</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">🚲 Bicycle</span><span class="spec">👤 1 Rider</span><span class="spec">🏔️ Trail</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Mountain%20Bike'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/cycle2.jpg" alt="Road Bike"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Road Cycle</div>
-          <div class="vehicle-name">Road Bike</div>
-          <div class="vehicle-type">Speed Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 550</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">🚲 Bicycle</span><span class="spec">👤 1 Rider</span><span class="spec">🛣️ Road</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Road%20Bike'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/cycle3.jpg" alt="Hybrid Bike"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">Hybrid Cycle</div>
-          <div class="vehicle-name">Hybrid Bike</div>
-          <div class="vehicle-type">Mixed Terrain</div>
-          <div class="vehicle-price">From <strong>Rs. 520</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">🚲 Bicycle</span><span class="spec">👤 1 Rider</span><span class="spec">🌿 Hybrid</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=Hybrid%20Bike'">Book Now</button>
-        </div>
-      </div>
-
-      <div class="vehicle-card">
-        <div class="vehicle-img"><img src="${pageContext.request.contextPath}/images/cycle4.jpg" alt="City Bicycle"></div>
-        <div class="vehicle-body">
-          <div class="vehicle-tag">City Cycle</div>
-          <div class="vehicle-name">City Bicycle</div>
-          <div class="vehicle-type">Urban Ride</div>
-          <div class="vehicle-price">From <strong>Rs. 450</strong> / day</div>
-          <div class="vehicle-specs">
-            <span class="spec">🚲 Bicycle</span><span class="spec">👤 1 Rider</span><span class="spec">🏙️ City</span>
-          </div>
-          <button class="btn-sm" onclick="location.href='${pageContext.request.contextPath}/book?vehicle=City%20Bicycle'">Book Now</button>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
 </section>
 

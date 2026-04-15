@@ -577,7 +577,7 @@
 
     <div class="vehicle-card">
    <div class="vehicle-img">
-     <img src="${pageContext.request.contextPath}/images/image3.png" 
+     <img src="${pageContext.request.contextPath}/images/Himalayan.png" 
        alt="Fortuner" 
        style="width:100%; height:100%; object-fit:cover; display:block;">
       </div>
@@ -596,7 +596,7 @@
 
     <div class="vehicle-card">
    <div class="vehicle-img">
-     <img src="${pageContext.request.contextPath}/images/image4.png" 
+     <img src="${pageContext.request.contextPath}/images/HondaActiva.png" 
        alt="Fortuner" 
        style="width:100%; height:100%; object-fit:cover; display:block;">
       </div>
