@@ -1,6 +1,8 @@
 package com.drivektm.controller;
 
 import com.drivektm.config.DBConfig;
+import com.drivektm.model.BookingModel;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -51,6 +53,7 @@ public class BookController extends HttpServlet {
         if (isEmpty(fullName) || isEmpty(email) || isEmpty(phone) || isEmpty(vehicleName)
                 || isEmpty(pickupLocation) || isEmpty(dropoffLocation)
                 || isEmpty(pickupDateStr) || isEmpty(dropoffDateStr)) {
+
             response.sendRedirect(request.getContextPath() + "/book?error=empty");
             return;
         }
@@ -66,6 +69,19 @@ public class BookController extends HttpServlet {
 
             int userId = (Integer) session.getAttribute("userId");
 
+            BookingModel booking = new BookingModel(
+                    userId,
+                    fullName,
+                    email,
+                    phone,
+                    vehicleName,
+                    pickupLocation,
+                    dropoffLocation,
+                    pickupDate,
+                    dropoffDate,
+                    message
+            );
+
             String sql = "INSERT INTO bookings "
                     + "(user_id, full_name, email, phone, vehicle_name, pickup_location, dropoff_location, pickup_date, dropoff_date, message) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -73,16 +89,16 @@ public class BookController extends HttpServlet {
             try (Connection con = DBConfig.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
 
-                ps.setInt(1, userId);
-                ps.setString(2, fullName);
-                ps.setString(3, email);
-                ps.setString(4, phone);
-                ps.setString(5, vehicleName);
-                ps.setString(6, pickupLocation);
-                ps.setString(7, dropoffLocation);
-                ps.setDate(8, pickupDate);
-                ps.setDate(9, dropoffDate);
-                ps.setString(10, message);
+                ps.setInt(1, booking.getUserId());
+                ps.setString(2, booking.getFullName());
+                ps.setString(3, booking.getEmail());
+                ps.setString(4, booking.getPhone());
+                ps.setString(5, booking.getVehicleName());
+                ps.setString(6, booking.getPickupLocation());
+                ps.setString(7, booking.getDropoffLocation());
+                ps.setDate(8, booking.getPickupDate());
+                ps.setDate(9, booking.getDropoffDate());
+                ps.setString(10, booking.getMessage());
 
                 int result = ps.executeUpdate();
 

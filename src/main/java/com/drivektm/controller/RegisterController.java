@@ -1,7 +1,9 @@
 package com.drivektm.controller;
 
 import com.drivektm.config.DBConfig;
+import com.drivektm.model.UserModel;
 import com.drivektm.util.PasswordUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -79,32 +81,44 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
+        String hashedPassword = PasswordUtil.hashPassword(password);
+
+        UserModel user = new UserModel(
+                firstName,
+                lastName,
+                email,
+                phone,
+                hashedPassword,
+                licenseType
+        );
+
         try (Connection con = DBConfig.getConnection()) {
 
             // Check if email already exists
             String checkSql = "SELECT id FROM users WHERE email = ?";
             PreparedStatement checkPs = con.prepareStatement(checkSql);
-            checkPs.setString(1, email);
+            checkPs.setString(1, user.getEmail());
+
             ResultSet rs = checkPs.executeQuery();
 
             if (rs.next()) {
                 response.sendRedirect("register?error=exists"
-                        + "&firstName=" + enc(firstName)
-                        + "&lastName=" + enc(lastName)
-                        + "&phone=" + enc(phone));
+                        + "&firstName=" + enc(user.getFirstName())
+                        + "&lastName=" + enc(user.getLastName())
+                        + "&phone=" + enc(user.getPhone()));
                 return;
             }
 
             // Insert user into the database
             String insertSql = "INSERT INTO users (first_name, last_name, email, phone, password, license_type) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(insertSql);
-            ps.setString(1, firstName);
-            ps.setString(2, lastName);
-            ps.setString(3, email);
-            ps.setString(4, phone);
-            String hashedPassword = PasswordUtil.hashPassword(password);
-            ps.setString(5, hashedPassword);
-            ps.setString(6, licenseType);
+
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getPhone());
+            ps.setString(5, user.getPassword());
+            ps.setString(6, user.getLicenseType());
 
             int result = ps.executeUpdate();
 
