@@ -864,7 +864,7 @@ if (selectedVehicle == null || selectedVehicle.isEmpty()) {
 
         <div class="why-book-card">
           <div class="why-icon">✔</div>
-          <h4>Safe & Secure</h4>
+          <h4>Safe and Secure</h4>
           <p>Enjoy trusted booking, verified vehicles, and dependable support throughout your rental experience.</p>
         </div>
 
@@ -962,5 +962,3 @@ if (selectedVehicle == null || selectedVehicle.isEmpty()) {
 </body>
 </html>
 
-</body>
-</html>

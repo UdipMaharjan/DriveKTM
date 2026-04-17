@@ -3,7 +3,6 @@ package com.drivektm.controller;
 import com.drivektm.config.DBConfig;
 import com.drivektm.util.PasswordUtil;
 import com.drivektm.util.CookieUtil;
-import com.drivektm.util.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
