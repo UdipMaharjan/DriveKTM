@@ -232,6 +232,92 @@
     gap: 10px;
     margin-bottom: 18px;
   }
+    .vehicles-topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 13px 16px;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+
+  .search-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,169,110,0.08);
+  }
+
+  .search-input::placeholder {
+    color: var(--text-faint);
+  }
+
+  .search-btn,
+  .clear-btn {
+    padding: 13px 18px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-btn:hover,
+  .clear-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  .no-vehicles {
+    text-align: center;
+    padding: 28px;
+    border: 1px solid rgba(201,169,110,0.12);
+    background: var(--dark-2);
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  @media (max-width: 900px) {
+    .vehicles-topbar {
+      justify-content: center;
+    }
+
+    .search-form {
+      flex-direction: column;
+      max-width: 100%;
+    }
+
+    .search-input,
+    .search-btn,
+    .clear-btn {
+      width: 100%;
+    }
+  }
 
   .spec {
     font-size: 11px;
@@ -449,8 +535,30 @@
     ArrayList<HashMap<String, String>> bicycles =
         (ArrayList<HashMap<String, String>>) request.getAttribute("bicycles");
 %>
+<%
+    String search = (String) request.getAttribute("search");
+    if (search == null) {
+        search = "";
+    }
+%>
 
 <section class="vehicles-page">
+
+    <div class="vehicles-topbar">
+        <form action="<%= request.getContextPath() %>/vehicles" method="get" class="search-form">
+            <input
+                type="text"
+                name="search"
+                class="search-input"
+                placeholder="Search vehicles..."
+                value="<%= search %>">
+            <button type="submit" class="search-btn">Search</button>
+
+            <% if (!search.isEmpty()) { %>
+                <a href="<%= request.getContextPath() %>/vehicles" class="clear-btn">Clear</a>
+            <% } %>
+        </form>
+    </div>
 
     <!-- CARS -->
     <section class="category-section">
@@ -458,12 +566,12 @@
             <h2 class="category-title">Cars</h2>
         </div>
 
-        <div class="vehicles-grid">
-            <% if (cars != null) {
-                for (HashMap<String, String> v : cars) {
-                    String name = v.get("name");
-                    String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
-            %>
+            <div class="vehicles-grid">
+         <% if (cars != null && !cars.isEmpty()) {
+        for (HashMap<String, String> v : cars) {
+            String name = v.get("name");
+            String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
+                %>
 
             <div class="vehicle-card">
                 <div class="vehicle-img">
@@ -489,7 +597,13 @@
                 </div>
             </div>
 
-            <% } } %>
+            <% 
+            } 
+                } 
+            else { 
+    %>
+        <div class="no-vehicles">No cars found.</div>
+    <% }%>
         </div>
     </section>
 
@@ -500,7 +614,7 @@
         </div>
 
         <div class="vehicles-grid">
-            <% if (bikes != null) {
+            <% if (bikes != null && !bikes.isEmpty()) {
                 for (HashMap<String, String> v : bikes) {
                     String name = v.get("name");
                     String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
@@ -530,7 +644,10 @@
                 </div>
             </div>
 
-            <% } } %>
+            <% } } else { 
+    %>
+        <div class="no-vehicles">No Bikes found.</div>
+    <% }%>
         </div>
     </section>
 
@@ -541,7 +658,7 @@
         </div>
 
         <div class="vehicles-grid">
-            <% if (scooters != null) {
+            <% if (scooters != null && !scooters.isEmpty()) {
                 for (HashMap<String, String> v : scooters) {
                     String name = v.get("name");
                     String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
@@ -571,7 +688,10 @@
                 </div>
             </div>
 
-            <% } } %>
+            <% } }else { 
+                %>
+                <div class="no-vehicles">No scooters found.</div>
+            <% } %>
         </div>
     </section>
 
@@ -582,7 +702,7 @@
         </div>
 
         <div class="vehicles-grid">
-            <% if (bicycles != null) {
+            <% if (bicycles != null && !bicycles.isEmpty()) {
                 for (HashMap<String, String> v : bicycles) {
                     String name = v.get("name");
                     String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
@@ -612,7 +732,10 @@
                 </div>
             </div>
 
-            <% } } %>
+            <% } }else { 
+                %>
+                <div class="no-vehicles">No bicycles found.</div>
+            <% } %>
         </div>
     </section>
 

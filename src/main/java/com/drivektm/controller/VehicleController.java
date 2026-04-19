@@ -32,10 +32,35 @@ public class VehicleController extends HttpServlet {
         ArrayList<HashMap<String, String>> scooters = new ArrayList<>();
         ArrayList<HashMap<String, String>> bicycles = new ArrayList<>();
 
+        String search = request.getParameter("search");
+        if (search == null) {
+            search = "";
+        }
+        search = search.trim();
+
         try (Connection con = DBConfig.getConnection()) {
 
-            String sql = "SELECT * FROM vehicles WHERE status = 'Available' ORDER BY vehicle_id ASC";
-            PreparedStatement ps = con.prepareStatement(sql);
+            String sql;
+            PreparedStatement ps;
+
+            if (search.isEmpty()) {
+                sql = "SELECT * FROM vehicles WHERE status = 'Available' ORDER BY vehicle_id ASC";
+                ps = con.prepareStatement(sql);
+            } else {
+                sql = "SELECT * FROM vehicles "
+                    + "WHERE status = 'Available' "
+                    + "AND (vehicle_name LIKE ? OR category LIKE ? OR vehicle_type LIKE ? OR fuel LIKE ? OR feature LIKE ?) "
+                    + "ORDER BY vehicle_id ASC";
+                ps = con.prepareStatement(sql);
+
+                String keyword = "%" + search + "%";
+                ps.setString(1, keyword);
+                ps.setString(2, keyword);
+                ps.setString(3, keyword);
+                ps.setString(4, keyword);
+                ps.setString(5, keyword);
+            }
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -73,6 +98,7 @@ public class VehicleController extends HttpServlet {
         request.setAttribute("bikes", bikes);
         request.setAttribute("scooters", scooters);
         request.setAttribute("bicycles", bicycles);
+        request.setAttribute("search", search);
 
         request.getRequestDispatcher("/WEB-INF/Pages/vehicles.jsp").forward(request, response);
     }
