@@ -37,10 +37,36 @@ public class AdminVehiclesController extends HttpServlet {
 
         ArrayList<HashMap<String, String>> vehicles = new ArrayList<>();
 
+        String search = request.getParameter("search");
+        if (search == null) {
+            search = "";
+        }
+        search = search.trim();
+
         try (Connection con = DBConfig.getConnection()) {
 
-            String sql = "SELECT * FROM vehicles ORDER BY vehicle_id DESC";
-            PreparedStatement ps = con.prepareStatement(sql);
+            String sql;
+            PreparedStatement ps;
+
+            if (search.isEmpty()) {
+                sql = "SELECT * FROM vehicles ORDER BY vehicle_id DESC";
+                ps = con.prepareStatement(sql);
+            } else {
+                sql = "SELECT * FROM vehicles "
+                    + "WHERE vehicle_name LIKE ? "
+                    + "OR category LIKE ? "
+                    + "OR vehicle_type LIKE ? "
+                    + "OR status LIKE ? "
+                    + "ORDER BY vehicle_id DESC";
+                ps = con.prepareStatement(sql);
+
+                String keyword = "%" + search + "%";
+                ps.setString(1, keyword);
+                ps.setString(2, keyword);
+                ps.setString(3, keyword);
+                ps.setString(4, keyword);
+            }
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -62,6 +88,7 @@ public class AdminVehiclesController extends HttpServlet {
         }
 
         request.setAttribute("vehicles", vehicles);
+        request.setAttribute("search", search);
         request.getRequestDispatcher("/WEB-INF/Pages/adminVehicles.jsp").forward(request, response);
     }
 

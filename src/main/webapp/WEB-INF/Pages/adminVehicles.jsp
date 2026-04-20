@@ -237,10 +237,64 @@ td {
     color: var(--muted);
     padding: 35px;
 }
+.search-bar-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    max-width: 480px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 14px;
+    background: #181818;
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: var(--gold);
+}
+
+.search-btn,
+.clear-btn {
+    padding: 12px 16px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.search-btn:hover,
+.clear-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
 </style>
 </head>
 
 <body>
+<%
+    String search = (String) request.getAttribute("search");
+    if (search == null) {
+        search = "";
+    }
+%>
 
 <div class="admin-layout">
 
@@ -282,6 +336,21 @@ td {
             <% if (request.getParameter("error") != null) { %>
                 <div class="message error">Something went wrong. Please try again.</div>
             <% } %>
+            <div class="search-bar-wrap">
+    <form action="${pageContext.request.contextPath}/admin-vehicles" method="get" class="search-form">
+        <input type="text"
+               name="search"
+               class="search-input"
+               placeholder="Search by name, category, type or status"
+               value="<%= search %>">
+
+        <button type="submit" class="search-btn">Search</button>
+
+        <% if (!search.isEmpty()) { %>
+            <a href="${pageContext.request.contextPath}/admin-vehicles" class="clear-btn">Clear</a>
+        <% } %>
+    </form>
+</div>
 
             <div class="table-box">
                 <table>
