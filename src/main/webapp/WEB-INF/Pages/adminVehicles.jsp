@@ -237,22 +237,24 @@ td {
     color: var(--muted);
     padding: 35px;
 }
-.search-bar-wrap {
+.search-sort-wrap {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
 }
 
-.search-form {
+.search-sort-form {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
-    max-width: 480px;
+    max-width: 760px;
+    justify-content: flex-end;
 }
 
-.search-input {
-    flex: 1;
+.search-input,
+.sort-select {
     padding: 12px 14px;
     background: #181818;
     border: 1px solid rgba(201,169,110,0.25);
@@ -262,7 +264,18 @@ td {
     outline: none;
 }
 
-.search-input:focus {
+.search-input {
+    flex: 1;
+    min-width: 260px;
+}
+
+.sort-select {
+    min-width: 180px;
+    cursor: pointer;
+}
+
+.search-input:focus,
+.sort-select:focus {
     border-color: var(--gold);
 }
 
@@ -293,6 +306,12 @@ td {
     String search = (String) request.getAttribute("search");
     if (search == null) {
         search = "";
+    }
+%>
+<%
+    String sort = (String) request.getAttribute("sort");
+    if (sort == null) {
+        sort = "latest";
     }
 %>
 
@@ -336,18 +355,29 @@ td {
             <% if (request.getParameter("error") != null) { %>
                 <div class="message error">Something went wrong. Please try again.</div>
             <% } %>
-            <div class="search-bar-wrap">
-    <form action="${pageContext.request.contextPath}/admin-vehicles" method="get" class="search-form">
+<div class="search-sort-wrap">
+    <form action="${pageContext.request.contextPath}/admin-vehicles" method="get" class="search-sort-form">
+        
         <input type="text"
                name="search"
                class="search-input"
                placeholder="Search by name, category, type or status"
                value="<%= search %>">
 
-        <button type="submit" class="search-btn">Search</button>
+        <select name="sort" class="sort-select">
+            <option value="latest" <%= "latest".equals(sort) ? "selected" : "" %>>Latest</option>
+            <option value="oldest" <%= "oldest".equals(sort) ? "selected" : "" %>>Oldest</option>
+            <option value="name_asc" <%= "name_asc".equals(sort) ? "selected" : "" %>>Name A-Z</option>
+            <option value="name_desc" <%= "name_desc".equals(sort) ? "selected" : "" %>>Name Z-A</option>
+            <option value="price_asc" <%= "price_asc".equals(sort) ? "selected" : "" %>>Price Low to High</option>
+            <option value="price_desc" <%= "price_desc".equals(sort) ? "selected" : "" %>>Price High to Low</option>
+            <option value="status" <%= "status".equals(sort) ? "selected" : "" %>>Status</option>
+        </select>
 
-        <% if (!search.isEmpty()) { %>
-            <a href="${pageContext.request.contextPath}/admin-vehicles" class="clear-btn">Clear</a>
+        <button type="submit" class="search-btn">Apply</button>
+
+        <% if (!search.isEmpty() || !"latest".equals(sort)) { %>
+            <a href="${pageContext.request.contextPath}/admin-vehicles" class="clear-btn">Reset</a>
         <% } %>
     </form>
 </div>
