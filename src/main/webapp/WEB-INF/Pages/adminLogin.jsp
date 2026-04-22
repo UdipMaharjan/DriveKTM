@@ -192,6 +192,15 @@ body {
 .back-home:hover {
     color: var(--gold);
 }
+.success-message {
+    background: rgba(80, 200, 120, 0.08);
+    border: 1px solid rgba(80, 200, 120, 0.25);
+    color: #9be7b3;
+    font-size: 13px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 @media (max-width: 520px) {
     nav {
@@ -216,19 +225,20 @@ body {
 
 <body>
 
-<nav>
-    <nav class="admin-nav">
+<nav class="admin-nav">
     <a href="${pageContext.request.contextPath}/home" class="nav-logo">
         Drive<span>KTM</span>
     </a>
 </nav>
 
-
-    <a href="${pageContext.request.contextPath}/login.jsp" class="btn-outline">User Login</a>
-</nav>
-
 <section class="admin-login-wrapper">
     <div class="admin-login-box">
+
+        <% if ("logout".equals(request.getParameter("success"))) { %>
+            <div class="success-message">
+                Logged out successfully.
+            </div>
+        <% } %>
 
         <div class="admin-label">Secure Access</div>
 
