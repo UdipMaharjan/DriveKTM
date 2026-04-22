@@ -253,7 +253,7 @@ body {
             <a href="#">Manage Bookings</a>
             <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
             <a href="#">Reports</a>
-            <a href="#" class="logout">Logout</a>
+            <a href="${pageContext.request.contextPath}/admin-logout" class="logout">Logout</a>
         </div>
     </aside>
 

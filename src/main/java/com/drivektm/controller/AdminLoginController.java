@@ -63,19 +63,19 @@ public class AdminLoginController extends HttpServlet {
 
                     CookieUtil.addCookie(response, "adminId", String.valueOf(rs.getInt("admin_id")), 3600);
 
-                    response.sendRedirect("admin-dashboard");
+                    response.sendRedirect(request.getContextPath() + "/admin-dashboard");
 
                 } else {
-                    response.sendRedirect("admin?error=invalid");
+                	response.sendRedirect(request.getContextPath() + "/admin?error=empty");
                 }
 
             } else {
-                response.sendRedirect("admin?error=invalid");
+            	response.sendRedirect(request.getContextPath() + "/admin?error=invalid");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("admin?error=server");
+            response.sendRedirect(request.getContextPath() + "/admin?error=server");
         }
     }
 }

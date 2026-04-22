@@ -228,7 +228,7 @@ tr:hover {
 
         <div class="menu">
             <a href="${pageContext.request.contextPath}/admin-dashboard">Dashboard</a>
-            <a href="#">Manage Vehicles</a>
+            <a href="${pageContext.request.contextPath}/admin-vehicles">Manage Vehicles</a>
             <a href="#">Manage Bookings</a>
             <a href="${pageContext.request.contextPath}/admin-users" class="active">Manage Users</a>
             <a href="#">Reports</a>
