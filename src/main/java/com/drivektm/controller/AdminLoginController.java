@@ -1,5 +1,5 @@
 package com.drivektm.controller;
-
+import com.drivektm.model.AdminModel;
 import com.drivektm.config.DBConfig;
 import com.drivektm.util.CookieUtil;
 
@@ -50,27 +50,25 @@ public class AdminLoginController extends HttpServlet {
             ps.setString(1, email);
 
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                String storedPassword = rs.getString("password");
+                AdminModel admin = new AdminModel();
+                admin.setAdminId(rs.getInt("admin_id"));
+                admin.setEmail(rs.getString("email"));
+                admin.setPassword(rs.getString("password"));
 
-                // If your admin password is plain text in database
-                if (password.equals(storedPassword)) {
-
+                if (password.equals(admin.getPassword())) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("adminId", rs.getInt("admin_id"));
-                    session.setAttribute("adminEmail", rs.getString("email"));
+                    session.setAttribute("adminId", admin.getAdminId());
+                    session.setAttribute("adminEmail", admin.getEmail());
 
-                    CookieUtil.addCookie(response, "adminId", String.valueOf(rs.getInt("admin_id")), 3600);
+                    CookieUtil.addCookie(response, "adminId", String.valueOf(admin.getAdminId()), 3600);
 
                     response.sendRedirect(request.getContextPath() + "/admin-dashboard");
-
                 } else {
-                	response.sendRedirect(request.getContextPath() + "/admin?error=empty");
+                    response.sendRedirect(request.getContextPath() + "/admin?error=invalid");
                 }
-
             } else {
-            	response.sendRedirect(request.getContextPath() + "/admin?error=invalid");
+                response.sendRedirect(request.getContextPath() + "/admin?error=invalid");
             }
 
         } catch (Exception e) {
