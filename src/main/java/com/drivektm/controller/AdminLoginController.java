@@ -39,7 +39,7 @@ public class AdminLoginController extends HttpServlet {
         String password = request.getParameter("password");
 
         if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-            response.sendRedirect("admin?error=empty");
+        	response.sendRedirect(request.getContextPath() + "/admin?error=empty");
             return;
         }
 
