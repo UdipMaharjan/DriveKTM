@@ -237,7 +237,7 @@ body {
             <a href="${pageContext.request.contextPath}/admin-vehicles" class="active">Manage Vehicles</a>
             <a href="#">Manage Bookings</a>
             <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
-            <a href="#">Reports</a>
+            <a href="${pageContext.request.contextPath}/admin-messages">Messages</a>
             <a href="#" class="logout">Logout</a>
         </div>
     </aside>

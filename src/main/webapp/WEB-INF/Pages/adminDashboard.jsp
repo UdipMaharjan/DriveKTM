@@ -252,7 +252,7 @@ body {
              <a href="${pageContext.request.contextPath}/admin-vehicles">Manage Vehicles</a>
             <a href="#">Manage Bookings</a>
             <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
-            <a href="#">Reports</a>
+            <a href="${pageContext.request.contextPath}/admin-messages">Messages</a>
             <a href="${pageContext.request.contextPath}/admin-logout" class="logout">Logout</a>
         </div>
     </aside>
@@ -268,7 +268,7 @@ body {
 
             <section class="welcome">
                 <h2>Welcome to <span>DriveKTM</span> Admin</h2>
-                <p>Manage users, vehicles, bookings and reports from one dashboard.</p>
+                <p>Manage users, vehicles, bookings and view messages from one dashboard.</p>
             </section>
 
             <section class="cards">
@@ -306,7 +306,7 @@ body {
                         <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
                         <a href="${pageContext.request.contextPath}/admin-vehicles">Manage Vehicles</a>
                         <a href="#">View Bookings</a>
-                        <a href="#">View Reports</a>
+                        <a href="#">View Messages</a>
                     </div>
                 </div>
 
