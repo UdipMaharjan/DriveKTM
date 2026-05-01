@@ -14,6 +14,8 @@ public class BookingModel {
     private Date pickupDate;
     private Date dropoffDate;
     private String message;
+    private String bookingStatus;
+    private String createdAt;
 
     public BookingModel() {
     }
@@ -35,7 +37,8 @@ public class BookingModel {
 
     public BookingModel(int bookingId, int userId, String fullName, String email, String phone,
                         String vehicleName, String pickupLocation, String dropoffLocation,
-                        Date pickupDate, Date dropoffDate, String message) {
+                        Date pickupDate, Date dropoffDate, String message,
+                        String bookingStatus, String createdAt) {
         this.bookingId = bookingId;
         this.userId = userId;
         this.fullName = fullName;
@@ -47,6 +50,8 @@ public class BookingModel {
         this.pickupDate = pickupDate;
         this.dropoffDate = dropoffDate;
         this.message = message;
+        this.bookingStatus = bookingStatus;
+        this.createdAt = createdAt;
     }
 
     public int getBookingId() {
@@ -135,5 +140,21 @@ public class BookingModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

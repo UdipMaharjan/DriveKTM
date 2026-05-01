@@ -249,8 +249,8 @@ body {
 
         <div class="menu">
             <a href="${pageContext.request.contextPath}/admin-dashboard" class="active">Dashboard</a>
-             <a href="${pageContext.request.contextPath}/admin-vehicles">Manage Vehicles</a>
-            <a href="#">Manage Bookings</a>
+            <a href="${pageContext.request.contextPath}/admin-vehicles">Manage Vehicles</a>
+            <a href="${pageContext.request.contextPath}/admin-bookings">Manage Bookings</a>
             <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
             <a href="${pageContext.request.contextPath}/admin-messages">Messages</a>
             <a href="${pageContext.request.contextPath}/admin-logout" class="logout">Logout</a>
@@ -305,8 +305,8 @@ body {
                     <div class="quick-actions">
                         <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
                         <a href="${pageContext.request.contextPath}/admin-vehicles">Manage Vehicles</a>
-                        <a href="#">View Bookings</a>
-                        <a href="#">View Messages</a>
+                        <a href="${pageContext.request.contextPath}/admin-bookings">View Bookings</a>
+                        <a href="${pageContext.request.contextPath}/admin-messages">View Messages</a>
                     </div>
                 </div>
 

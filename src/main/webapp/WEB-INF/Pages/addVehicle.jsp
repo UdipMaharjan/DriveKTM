@@ -224,10 +224,10 @@ body {
         <div class="menu">
             <a href="${pageContext.request.contextPath}/admin-dashboard">Dashboard</a>
             <a href="${pageContext.request.contextPath}/admin-vehicles" class="active">Manage Vehicles</a>
-            <a href="#">Manage Bookings</a>
+            <a href="${pageContext.request.contextPath}/admin-bookings">Manage Bookings</a>
             <a href="${pageContext.request.contextPath}/admin-users">Manage Users</a>
             <a href="${pageContext.request.contextPath}/admin-messages">Messages</a>
-            <a href="#" class="logout">Logout</a>
+            <a href="${pageContext.request.contextPath}/admin-logout" class="logout">Logout</a>
         </div>
     </aside>
 
