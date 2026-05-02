@@ -34,22 +34,46 @@ public class AdminDashboardController extends HttpServlet {
         }
 
         int totalUsers = 0;
+        int totalVehicles = 0;
+        int totalBookings = 0;
+        int pendingBookings = 0;
 
         try (Connection con = DBConfig.getConnection()) {
 
-            String query = "SELECT COUNT(*) FROM users";
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
+            totalUsers = getCount(con, "SELECT COUNT(*) FROM users");
 
-            if (rs.next()) {
-                totalUsers = rs.getInt(1);
-            }
+            totalVehicles = getCount(con, "SELECT COUNT(*) FROM vehicles");
+
+            totalBookings = getCount(con, "SELECT COUNT(*) FROM bookings");
+
+            pendingBookings = getCount(con, "SELECT COUNT(*) FROM bookings WHERE booking_status = 'Pending'");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         request.setAttribute("totalUsers", totalUsers);
+        request.setAttribute("totalVehicles", totalVehicles);
+        request.setAttribute("totalBookings", totalBookings);
+        request.setAttribute("pendingBookings", pendingBookings);
+
         request.getRequestDispatcher("/WEB-INF/Pages/adminDashboard.jsp").forward(request, response);
+    }
+
+    private int getCount(Connection con, String sql) {
+        int count = 0;
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 }

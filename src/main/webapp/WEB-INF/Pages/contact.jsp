@@ -11,7 +11,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
 <style>
 @charset "UTF-8";
 
@@ -394,6 +401,29 @@ nav {
 .btn-gold:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(201,169,110,0.35);
+}
+#driveKtmMap {
+  width: 100%;
+  height: 360px;
+  border-left: 1px solid rgba(201,169,110,0.18);
+  filter: grayscale(30%) brightness(80%);
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #111111;
+  color: #F0EDE8;
+  border: 1px solid rgba(201,169,110,0.35);
+}
+
+.leaflet-popup-content {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+}
+
+.leaflet-control-attribution {
+  background: rgba(10,10,10,0.8) !important;
+  color: #C9A96E !important;
 }
 
 /* ── INFO PANEL ── */
@@ -933,9 +963,7 @@ footer {
         </p>
       </div>
 
-      <div class="map-art">
-        <div class="map-pin">📍</div>
-      </div>
+ <div id="driveKtmMap"></div>
     </div>
   </section>
 
@@ -1003,6 +1031,18 @@ footer {
     el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
     observer.observe(el);
   });
+  const driveKtmLocation = [27.7154, 85.3123]; // Thamel, Kathmandu approx
+
+  const map = L.map('driveKtmMap').setView(driveKtmLocation, 14);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  L.marker(driveKtmLocation).addTo(map)
+    .bindPopup("<b>DriveKTM</b><br>Thamel, Kathmandu<br>Premium Vehicle Rental")
+    .openPopup();
 </script>
 
 </body>

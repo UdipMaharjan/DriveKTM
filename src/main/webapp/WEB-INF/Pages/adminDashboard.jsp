@@ -10,6 +10,21 @@
     if (totalUsers == null) {
         totalUsers = 0;
     }
+
+    Integer totalVehicles = (Integer) request.getAttribute("totalVehicles");
+    if (totalVehicles == null) {
+        totalVehicles = 0;
+    }
+
+    Integer totalBookings = (Integer) request.getAttribute("totalBookings");
+    if (totalBookings == null) {
+        totalBookings = 0;
+    }
+
+    Integer pendingBookings = (Integer) request.getAttribute("pendingBookings");
+    if (pendingBookings == null) {
+        pendingBookings = 0;
+    }
 %>
 
 <!DOCTYPE html>
@@ -271,31 +286,31 @@ body {
                 <p>Manage users, vehicles, bookings and view messages from one dashboard.</p>
             </section>
 
-            <section class="cards">
-                <div class="card">
-                    <h3>Total Users</h3>
-                    <div class="number"><%= totalUsers %></div>
-                    <div class="note">Registered customers</div>
-                </div>
+<section class="cards">
+    <div class="card">
+        <h3>Total Users</h3>
+        <div class="number"><%= totalUsers %></div>
+        <div class="note">Registered customers</div>
+    </div>
 
-                <div class="card">
-                    <h3>Total Vehicles</h3>
-                    <div class="number">0</div>
-                    <div class="note">Coming next</div>
-                </div>
+    <div class="card">
+        <h3>Total Vehicles</h3>
+        <div class="number"><%= totalVehicles %></div>
+        <div class="note">Vehicles in fleet</div>
+    </div>
 
-                <div class="card">
-                    <h3>Total Bookings</h3>
-                    <div class="number">0</div>
-                    <div class="note">Coming next</div>
-                </div>
+    <div class="card">
+        <h3>Total Bookings</h3>
+        <div class="number"><%= totalBookings %></div>
+        <div class="note">Customer bookings</div>
+    </div>
 
-                <div class="card">
-                    <h3>Pending Bookings</h3>
-                    <div class="number">0</div>
-                    <div class="note">Coming next</div>
-                </div>
-            </section>
+    <div class="card">
+        <h3>Pending Bookings</h3>
+        <div class="number"><%= pendingBookings %></div>
+        <div class="note">Awaiting confirmation</div>
+    </div>
+</section>
 
             <section class="dashboard-grid">
 
