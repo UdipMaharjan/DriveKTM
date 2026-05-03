@@ -330,8 +330,26 @@
   .feature-body h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--white); margin-bottom: 6px; }
   .feature-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
   .why-visual { position: relative; }
-  .why-img-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; }
-  .why-img-bg { width: 100%; height: 100%; background: linear-gradient(135deg, #1a1208 0%, #111 60%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; }
+  .why-img-wrap { 
+  position: relative; 
+  aspect-ratio: 4/5; 
+  overflow: hidden; 
+}
+
+.why-img-bg { 
+  width: 100%; 
+  height: 100%; 
+  background: linear-gradient(135deg, #1a1208 0%, #111 60%, #1a1a1a 100%);
+  overflow: hidden;
+}
+
+.why-img-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
   .why-badge {
     position: absolute; bottom: -20px; left: -20px;
     background: var(--gold); color: var(--dark); padding: 24px 28px;
@@ -682,28 +700,8 @@
     <div class="why-visual">
       <div class="why-img-wrap">
         <div class="why-img-bg">
-          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-            <defs>
-              <radialGradient id="carGlow" cx="50%" cy="60%" r="50%">
-                <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.2"/>
-                <stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <rect width="400" height="500" fill="#111"/>
-            <rect width="400" height="500" fill="url(#carGlow)"/>
-            <path d="M0 350 L80 200 L160 300 L220 150 L300 280 L360 180 L400 260 L400 500 L0 500Z" fill="rgba(201,169,110,0.05)"/>
-            <path d="M0 380 L100 250 L180 330 L250 200 L320 300 L400 230 L400 500 L0 500Z" fill="rgba(201,169,110,0.04)"/>
-            <g transform="translate(60,200)">
-              <rect x="0" y="60" width="280" height="55" rx="5" fill="#C9A96E" opacity="0.7"/>
-              <path d="M40 60 L70 20 L210 20 L240 60Z" fill="#A07D50" opacity="0.8"/>
-              <rect x="73" y="24" width="134" height="34" rx="3" fill="rgba(180,220,255,0.25)"/>
-              <circle cx="65" cy="115" r="22" fill="#1a1a1a" stroke="#C9A96E" stroke-width="2"/>
-              <circle cx="65" cy="115" r="9" fill="#333"/>
-              <circle cx="215" cy="115" r="22" fill="#1a1a1a" stroke="#C9A96E" stroke-width="2"/>
-              <circle cx="215" cy="115" r="9" fill="#333"/>
-            </g>
-            <text x="200" y="450" text-anchor="middle" font-family="Cormorant Garamond" font-size="14" fill="#C9A96E" fill-opacity="0.4" letter-spacing="4">KATHMANDU VALLEY</text>
-          </svg>
+         <img src="${pageContext.request.contextPath}/images/image5.png" 
+       alt="DriveKTM premium rental vehicle">
         </div>
       </div>
       <div class="why-badge">
@@ -764,7 +762,7 @@
     </div>
     <div class="footer-col">
       <h5>Company</h5>
-      <a href="about.jsp">About Us</a>
+      <a href="${pageContext.request.contextPath}/about">About Us</a>
       <a href="#vehicles">Our Fleet</a>
       <a href="careers.jsp">Careers</a>
       <a href="book.jsp">Book</a>

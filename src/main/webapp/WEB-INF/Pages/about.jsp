@@ -391,7 +391,7 @@ section {
   min-height: 420px;
   background:
     linear-gradient(to bottom, rgba(10,10,10,0.1), rgba(10,10,10,0.72)),
-    url("${pageContext.request.contextPath}/images/ToyotaCamry.png");
+    url("${pageContext.request.contextPath}/images/image5.png");
   background-size: cover;
   background-position: center;
 }
