@@ -875,7 +875,7 @@ footer {
     </p>
 
     <div class="hero-actions">
-      <a href="${pageContext.request.contextPath}/vehicles" class="btn-gold">Explore Our Fleet</a>
+      <a href="${pageContext.request.contextPath}/explore" class="btn-gold">Explore Our Fleet</a>
       <a href="${pageContext.request.contextPath}/contact" class="btn-dark-outline">Contact Us</a>
     </div>
   </div>
