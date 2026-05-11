@@ -788,7 +788,7 @@
   </div>
 </footer>
 
-<button class="float-cta" onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">
+<button class="float-cta" onclick="window.location.href='${pageContext.request.contextPath}/contact'">
   📞 Call Us Now
 </button>
 
