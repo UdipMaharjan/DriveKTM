@@ -607,8 +607,8 @@ section {
 .cta-box {
   border: 1px solid rgba(201,169,110,0.35);
   background:
-    linear-gradient(to right, rgba(10,10,10,0.9), rgba(10,10,10,0.55)),
-    url("${pageContext.request.contextPath}/images/ToyotaFortuner.png");
+
+    url("${pageContext.request.contextPath}/images/sss.png");
   background-size: cover;
   background-position: center right;
   padding: 52px 58px;
@@ -1068,7 +1068,6 @@ footer {
   <div class="cta-box">
     <div>
       <h2>Ready to ride with DriveKTM?</h2>
-      <p>Your journey starts with comfort, safety, and trust.</p>
     </div>
 
     <a href="${pageContext.request.contextPath}/book" class="btn-gold">Book Your Ride</a>
