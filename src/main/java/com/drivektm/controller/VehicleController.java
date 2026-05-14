@@ -1,4 +1,5 @@
 package com.drivektm.controller;
+import com.drivektm.model.VehicleModel;
 
 import com.drivektm.config.DBConfig;
 
@@ -27,10 +28,10 @@ public class VehicleController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        ArrayList<HashMap<String, String>> cars = new ArrayList<>();
-        ArrayList<HashMap<String, String>> bikes = new ArrayList<>();
-        ArrayList<HashMap<String, String>> scooters = new ArrayList<>();
-        ArrayList<HashMap<String, String>> bicycles = new ArrayList<>();
+    	ArrayList<VehicleModel> cars = new ArrayList<>();
+    	ArrayList<VehicleModel> bikes = new ArrayList<>();
+    	ArrayList<VehicleModel> scooters = new ArrayList<>();
+    	ArrayList<VehicleModel> bicycles = new ArrayList<>();
 
         String search = request.getParameter("search");
         if (search == null) {
@@ -64,18 +65,19 @@ public class VehicleController extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                HashMap<String, String> vehicle = new HashMap<>();
+            	VehicleModel vehicle = new VehicleModel();
 
-                vehicle.put("id", String.valueOf(rs.getInt("vehicle_id")));
-                vehicle.put("name", rs.getString("vehicle_name"));
-                vehicle.put("category", rs.getString("category"));
-                vehicle.put("tag", rs.getString("tag"));
-                vehicle.put("type", rs.getString("vehicle_type"));
-                vehicle.put("price", String.valueOf(rs.getInt("price_per_day")));
-                vehicle.put("fuel", rs.getString("fuel"));
-                vehicle.put("seats", rs.getString("seats"));
-                vehicle.put("feature", rs.getString("feature"));
-                vehicle.put("image", rs.getString("image_name"));
+            	vehicle.setVehicleId(rs.getInt("vehicle_id"));
+            	vehicle.setVehicleName(rs.getString("vehicle_name"));
+            	vehicle.setCategory(rs.getString("category"));
+            	vehicle.setTag(rs.getString("tag"));
+            	vehicle.setVehicleType(rs.getString("vehicle_type"));
+            	vehicle.setPricePerDay(rs.getInt("price_per_day"));
+            	vehicle.setFuel(rs.getString("fuel"));
+            	vehicle.setSeats(rs.getString("seats"));
+            	vehicle.setFeature(rs.getString("feature"));
+            	vehicle.setImageName(rs.getString("image_name"));
+            	vehicle.setStatus(rs.getString("status"));
 
                 String category = rs.getString("category");
 

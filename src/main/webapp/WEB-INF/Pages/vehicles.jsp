@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page import="com.drivektm.model.VehicleModel" %>
 <style>
   :root {
     --gold: #C9A96E;
@@ -523,17 +523,17 @@
 </section>
 
 <%
-    ArrayList<HashMap<String, String>> cars =
-        (ArrayList<HashMap<String, String>>) request.getAttribute("cars");
+    ArrayList<VehicleModel> cars =
+        (ArrayList<VehicleModel>) request.getAttribute("cars");
 
-    ArrayList<HashMap<String, String>> bikes =
-        (ArrayList<HashMap<String, String>>) request.getAttribute("bikes");
+    ArrayList<VehicleModel> bikes =
+        (ArrayList<VehicleModel>) request.getAttribute("bikes");
 
-    ArrayList<HashMap<String, String>> scooters =
-        (ArrayList<HashMap<String, String>>) request.getAttribute("scooters");
+    ArrayList<VehicleModel> scooters =
+        (ArrayList<VehicleModel>) request.getAttribute("scooters");
 
-    ArrayList<HashMap<String, String>> bicycles =
-        (ArrayList<HashMap<String, String>>) request.getAttribute("bicycles");
+    ArrayList<VehicleModel> bicycles =
+        (ArrayList<VehicleModel>) request.getAttribute("bicycles");
 %>
 <%
     String search = (String) request.getAttribute("search");
@@ -568,26 +568,26 @@
 
             <div class="vehicles-grid">
          <% if (cars != null && !cars.isEmpty()) {
-        for (HashMap<String, String> v : cars) {
-            String name = v.get("name");
+        	 for (VehicleModel v : cars) {
+            String name = v.getVehicleName();
             String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
                 %>
 
             <div class="vehicle-card">
                 <div class="vehicle-img">
-                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.getImageName() %>" alt="<%= name %>">
                 </div>
 
                 <div class="vehicle-body">
-                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                       <div class="vehicle-tag"><%= v.getTag() %></div>
                     <div class="vehicle-name"><%= name %></div>
-                    <div class="vehicle-type"><%= v.get("type") %></div>
-                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+                    <div class="vehicle-type"><%= v.getVehicleType() %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.getPricePerDay() %></strong> / day</div>
 
                     <div class="vehicle-specs">
-                        <span class="spec">⛽ <%= v.get("fuel") %></span>
-                        <span class="spec">👥 <%= v.get("seats") %></span>
-                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                        <span class="spec">⛽ <%= v.getFuel() %></span>
+                        <span class="spec">👥 <%= v.getSeats()%></span>
+                        <span class="spec">⭐ <%= v.getFeature()%></span>
                     </div>
 
                     <button class="btn-sm"
@@ -615,26 +615,26 @@
 
         <div class="vehicles-grid">
             <% if (bikes != null && !bikes.isEmpty()) {
-                for (HashMap<String, String> v : bikes) {
-                    String name = v.get("name");
+            	for (VehicleModel v : bikes) {
+                    String name = v.getVehicleName();
                     String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
             %>
 
             <div class="vehicle-card">
                 <div class="vehicle-img">
-                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.getImageName() %>" alt="<%= name %>">
                 </div>
 
                 <div class="vehicle-body">
-                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-tag"><%= v.getTag() %></div>
                     <div class="vehicle-name"><%= name %></div>
-                    <div class="vehicle-type"><%= v.get("type") %></div>
-                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+                    <div class="vehicle-type"><%= v.getVehicleType() %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.getPricePerDay() %></strong> / day</div>
 
                     <div class="vehicle-specs">
-                        <span class="spec">⛽ <%= v.get("fuel") %></span>
-                        <span class="spec">👥 <%= v.get("seats") %></span>
-                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                        <span class="spec">⛽ <%= v.getFuel() %></span>
+                        <span class="spec">👥 <%= v.getSeats()%></span>
+                        <span class="spec">⭐ <%= v.getFeature()%></span>
                     </div>
 
                     <button class="btn-sm"
@@ -659,26 +659,26 @@
 
         <div class="vehicles-grid">
             <% if (scooters != null && !scooters.isEmpty()) {
-                for (HashMap<String, String> v : scooters) {
-                    String name = v.get("name");
+            	for (VehicleModel v : scooters) {
+                    String name = v.getVehicleName();
                     String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
             %>
 
             <div class="vehicle-card">
                 <div class="vehicle-img">
-                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.getImageName() %>" alt="<%= name %>">
                 </div>
 
                 <div class="vehicle-body">
-                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-tag"><%= v.getTag() %></div>
                     <div class="vehicle-name"><%= name %></div>
-                    <div class="vehicle-type"><%= v.get("type") %></div>
-                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+                    <div class="vehicle-type"><%= v.getVehicleType() %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.getPricePerDay() %></strong> / day</div>
 
                     <div class="vehicle-specs">
-                        <span class="spec">⛽ <%= v.get("fuel") %></span>
-                        <span class="spec">👥 <%= v.get("seats") %></span>
-                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                        <span class="spec">⛽ <%= v.getFuel() %></span>
+                        <span class="spec">👥 <%= v.getSeats()%></span>
+                        <span class="spec">⭐ <%= v.getFeature()%></span>
                     </div>
 
                     <button class="btn-sm"
@@ -703,26 +703,26 @@
 
         <div class="vehicles-grid">
             <% if (bicycles != null && !bicycles.isEmpty()) {
-                for (HashMap<String, String> v : bicycles) {
-                    String name = v.get("name");
+            	for (VehicleModel v : bicycles) {
+                    String name = v.getVehicleName();
                     String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
             %>
 
             <div class="vehicle-card">
                 <div class="vehicle-img">
-                    <img src="<%= request.getContextPath() %>/images/<%= v.get("image") %>" alt="<%= name %>">
+                    <img src="<%= request.getContextPath() %>/images/<%= v.getImageName() %>" alt="<%= name %>">
                 </div>
 
                 <div class="vehicle-body">
-                    <div class="vehicle-tag"><%= v.get("tag") %></div>
+                    <div class="vehicle-tag"><%= v.getTag() %></div>
                     <div class="vehicle-name"><%= name %></div>
-                    <div class="vehicle-type"><%= v.get("type") %></div>
-                    <div class="vehicle-price">From <strong>Rs. <%= v.get("price") %></strong> / day</div>
+                    <div class="vehicle-type"><%= v.getVehicleType() %></div>
+                    <div class="vehicle-price">From <strong>Rs. <%= v.getPricePerDay() %></strong> / day</div>
 
                     <div class="vehicle-specs">
-                        <span class="spec">⛽ <%= v.get("fuel") %></span>
-                        <span class="spec">👥 <%= v.get("seats") %></span>
-                        <span class="spec">⭐ <%= v.get("feature") %></span>
+                        <span class="spec">⛽ <%= v.getFuel() %></span>
+                        <span class="spec">👥 <%= v.getSeats()%></span>
+                        <span class="spec">⭐ <%= v.getFeature()%></span>
                     </div>
 
                     <button class="btn-sm"
@@ -770,7 +770,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 DriveKTM. All rights reserved.</p>
+    <p>© 2026 DriveKTM. All rights reserved.</p>
     <p>Privacy Policy · Terms of Service</p>
   </div>
 </footer>

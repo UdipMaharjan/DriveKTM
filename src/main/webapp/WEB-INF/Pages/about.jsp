@@ -1054,7 +1054,7 @@ footer {
 
     <div class="timeline-item">
       <div class="timeline-icon">🏔️</div>
-      <div class="timeline-year">2025</div>
+      <div class="timeline-year">2026</div>
       <h4>Trusted Across KTM</h4>
       <p>
         DriveKTM became a trusted mobility partner for thousands of happy customers.
@@ -1108,7 +1108,7 @@ footer {
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 DriveKTM. All rights reserved.</p>
+    <p>© 2026 DriveKTM. All rights reserved.</p>
     <p>Privacy Policy · Terms of Service</p>
   </div>
 </footer>

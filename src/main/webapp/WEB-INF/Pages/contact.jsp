@@ -1003,7 +1003,7 @@ footer {
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 DriveKTM. All rights reserved.</p>
+    <p>© 2026 DriveKTM. All rights reserved.</p>
     <p>Privacy Policy · Terms of Service</p>
   </div>
 </footer>
